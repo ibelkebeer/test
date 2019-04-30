@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import sys
-import time
 
 class pos:
     def __init__(self, index, vals):

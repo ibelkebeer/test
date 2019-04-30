@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <table style="width: 50%" border ="1" align="center">
+    <tr>
+  		<td style="width: 77px"><strong>Naive</strong></td>
+  		<td>Look through the board cells linearly, and if there is an empty cell, cycle through numbers 1 through 9, and when
+      a number doesn't conflict with its clique, place that number in the cell and move on to the next cell. Backtrack
+      when there is no non-conflicting guess for a cell</td>
+  	</tr>
+  	<tr>
+  		<td style="width: 77px"><strong>Smarter-1</strong></td>
+  		<td>Detirmine what values fit into the empty cells and fill them with those values starting with the cells that have the
+        least number of possible values.</td>
+  	</tr>
+  	<tr>
+  		<td style="width: 77px"><strong>Smarter-2</strong></td>
+  		<td>Same as smarter-1, but when a guess is placed in a cell, remove that guess from all other cells in its clique.
+      If this lowers the number of guesses for a cell to 1, remove that guess from all other cells in its clique and so on.
+      If this lowers the number of guesses for a cell to 0, then the original guess for the first cell is invalid.</td>
+  	</tr>
+  </table>
+
+  <br>
+
+  <table border ="1" align="center">
+	<tr>
+		<td></td>
+		<td><strong>Naive</strong></td>
+		<td><strong>Smarter-1</strong></td>
+		<td><strong>Smarter-2</strong></td>
+	</tr>
+	<tr>
+		<td><strong>A1</strong></td>
+		<td>time = 0.01 secs, backtracks = 260</td>
+		<td>t=0.01, b = 42, ratio = 6.2</td>
+		<td>t=0.01, b = 0, r = &infin;</td>
+	</tr>
+	<tr>
+		<td><strong>A2</strong></td>
+		<td>t=0.41, b = 27917</td>
+		<td>t=1.6, b = 86789, r = .32</td>
+		<td>t=0.35, b = 172, r = 162.3</td>
+	</tr>
+	<tr>
+		<td><strong>A3</strong></td>
+		<td>t=0.14, b = 10616</td>
+		<td>t=10.03, b = 542866, r = .02</td>
+		<td>t=0.5, b = 329, r = 32.3</td>
+	</tr>
+	<tr>
+		<td><strong>A4</strong></td>
+		<td>t=0.46, b = 39975</td>
+		<td>t=0.09, b = 5279, r = 7.6</td>
+		<td>t=0.03, b = 11, r = 3634.1</td>
+	</tr>
+	<tr>
+		<td><strong>A5</strong></td>
+		<td>t=0.1, b = 6964</td>
+		<td>t=0.07, b = 3738, r = 1.9</td>
+		<td>t=0.03, b = 1, r = 6964</td>
+	</tr>
+	<tr>
+		<td><strong>A6</strong></td>
+		<td>t=0.7, b = 49498</td>
+		<td>t=553.36, b = 31061101, r = .002</td>
+		<td>t=22.68, b = 4161, r = 11.9</td>
+	</tr>
+	<tr>
+		<td><strong>A7</strong></td>
+		<td>t=42.35, b = 2482069</td>
+		<td>t=66.46, b = 3163832, r = .8</td>
+		<td>t=11.31, b = 5928, r = 418.7</td>
+	</tr>
+	<tr>
+		<td><strong>A8</strong></td>
+		<td>t=333.06, b = 19029872</td>
+		<td>t=499.51, b = 22515662, r = .8</td>
+		<td>t=24.46, b = 6906, r = 2754.4</td>
+	</tr>
+</table>
