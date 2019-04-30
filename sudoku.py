@@ -142,7 +142,7 @@ def solve(i):
     return False
 
 solve(spots.first)
-print(b[0])
+print("FIRST " + name[1] + ": " + str(b[0]))
 f = open(sys.argv[2], 'w+')
 i = 9
 while i <= 81:

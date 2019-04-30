@@ -128,11 +128,7 @@ def to_board():
 
 b = [0]
 def solve(i):
-    print(i.value.index)
-    to_board()
-    time.sleep(.3)
     for j in i.value.vals:
-        print(j)
         can_move = True
         for k in cd[i.value.index]:
             if board[k] == str(j):
@@ -140,6 +136,7 @@ def solve(i):
         if can_move:
             board[i.value.index] = str(j)
             forced_vals = [j]
+            nodes = [i.value.index]
             def force(val, cur):
                 t = i
                 while t.next != None:
@@ -150,6 +147,8 @@ def solve(i):
                             t.value.vals.remove(val)
                             removed = True
                         if len(t.value.vals) == 1 and removed:
+                            forced_vals.append(t.value.vals[0])
+                            nodes.append(t.value.index)
                             force(t.value.vals[0], t)
                 if t.value.index in cd[cur.value.index]:
                     removed = False
@@ -158,6 +157,7 @@ def solve(i):
                         removed = True
                     if len(t.value.vals) == 1 and removed:
                         forced_vals.append(t.value.vals[0])
+                        nodes.append(t.value.index)
                         force(t.value.vals[0], t)
             force(j, i)
             forced = False
@@ -168,23 +168,24 @@ def solve(i):
                 t = t.next
             if not forced and (i.next == None or solve(i.next)):
                 return True
-            t = i.next
             board[i.value.index] = "_"
-            while t != None:
-                for val in forced_vals:
-                    can_move = True
-                    for k in cd[t.value.index]:
-                        if board[k] == str(val):
-                            can_move = False
-                    if can_move:
-                        t.value.vals.append(j)
+            for val in range(len(nodes)):
+                t = i.next
+                while t != None:
+                    if t.value.index in cd[nodes[val]]:
+                        can_move = True
+                        for k in cd[t.value.index]:
+                            if board[k] == str(forced_vals[val]):
+                                can_move = False
+                        if can_move and forced_vals[val] not in t.value.vals:
+                            t.value.vals.append(forced_vals[val])
                     t = t.next
     b[0] += 1
     board[i.value.index] = "_"
     return False
 
 solve(spots.first)
-#print(b[0])
+print("FASTEST " + name[1] + ": " + str(b[0]))
 f = open(sys.argv[2], 'w+')
 i = 9
 while i <= 81:
